@@ -1,0 +1,19 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# secrets: never commit API keys
+.env
+
+# generated reports and Python caches
+reports/
+__pycache__/
+*.egg-info/
+
+2026_pmap.md
+PMAP_MLC_2026.md
+names.txt
+HHS Closeout Email for Covered Non-SES and Equivalent Employees.pdf
+
+output/
+

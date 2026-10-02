@@ -1,0 +1,57 @@
+[project]
+name = "pmap-calibrate"
+version = "0.1.0"
+description = "Check whether HHS performance ratings are supported by the employee narrative and performance plan, using the Jev decision model via OpenRouter."
+authors = [{ name = "Dylan Nielson" }]
+readme = "README.md"
+requires-python = ">= 3.12"
+dependencies = [
+  "click>=8.1",
+  "httpx>=0.27",
+  "pydantic>=2",
+  "pypdf>=4",
+  "python-docx>=1.1",
+  "python-dotenv>=1",
+  "rich>=13",
+  "truststore>=0.9",
+]
+
+[project.scripts]
+pmap-calibrate = "pmap_calibrate.cli:main"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pmap_calibrate"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64"]
+
+[tool.pixi.dependencies]
+python = ">=3.12"
+click = ">=8.1"
+httpx = ">=0.27"
+pydantic = ">=2"
+pypdf = ">=4"
+python-docx = ">=1.1"
+python-dotenv = ">=1"
+rich = ">=13"
+truststore = ">=0.9"
+
+[tool.pixi.pypi-dependencies]
+pmap-calibrate = { path = ".", editable = true }
+
+[tool.pixi.feature.test.dependencies]
+pytest = "*"
+
+[tool.pixi.environments]
+default = { features = ["test"], solve-group = "default" }
+
+[tool.pixi.tasks]
+test = "pytest -q"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
